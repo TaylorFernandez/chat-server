@@ -8,7 +8,8 @@ public class RequestGetLoginStatus implements Request {
     private String password;
 
     @JsonCreator
-    public RequestGetLoginStatus(@JsonProperty("username") String username, @JsonProperty("password") String password){
+    public RequestGetLoginStatus(@JsonProperty("username") String username,
+                                 @JsonProperty("password") String password){
         this.username = username;
         this.password = password;
     }
