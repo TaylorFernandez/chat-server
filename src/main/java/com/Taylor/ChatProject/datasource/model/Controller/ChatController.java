@@ -34,6 +34,7 @@ public class ChatController {
             System.out.println("Sending notification");
 
             ResponseGetChats response = new ResponseGetChats(null, false, "Unable to find thread!");
+            System.out.println("GetChats: " + ResponseGetChats.getJson(response));
             return new ResponseEntity<>(ResponseGetChats.getJson(response), HttpStatus.OK);
         }
         return null;
@@ -53,7 +54,6 @@ public class ChatController {
             System.out.println(thread.toString());
         }
         ResponseGetPeers r = new ResponseGetPeers(true, "Successfully got peers", peers);
-        System.out.println("JSON: " + ResponseGetPeers.getJson(r));
         return new ResponseEntity<>(ResponseGetPeers.getJson(r), HttpStatus.OK);
     }
 
