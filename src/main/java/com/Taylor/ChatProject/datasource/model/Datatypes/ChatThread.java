@@ -35,6 +35,10 @@ public class ChatThread {
         return chats;
     }
 
+    public void addChat(ChatMessage chat){
+        chats.add(chat);
+    }
+
     public static String getJson(ChatThread thread) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(thread);
     }
