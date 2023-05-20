@@ -1,5 +1,6 @@
 package com.Taylor.ChatProject.datasource.model.Controller;
 
+import com.Taylor.ChatProject.datasource.communications.Request.RequestCreateNewChat;
 import com.Taylor.ChatProject.datasource.communications.Request.RequestGetChats;
 import com.Taylor.ChatProject.datasource.communications.Request.RequestGetPeers;
 import com.Taylor.ChatProject.datasource.communications.Request.RequestSendNewChat;
@@ -86,6 +87,20 @@ public class ChatController {
         }
         BasicResponse r = new BasicResponse(false, "Couldn't find chat thread");
         return new ResponseEntity<>(BasicResponse.getJson(r), HttpStatus.OK);
+    }
+
+//    List<ChatThread> chats = new ArrayList<>(Arrays.asList(
+//            new ChatThread("taylor", "testUser", new ArrayList<>(Arrays.asList(
+//                    new ChatMessage("taylor", "Hello"),
+//                    new ChatMessage("testUser", "HI")
+//            )))
+//    ));
+    @PostMapping("/chat/createNewChat")
+    public ResponseEntity<Object> createNewChat(@RequestBody RequestCreateNewChat request) throws JsonProcessingException {
+        List<ChatMessage> temp = new ArrayList<ChatMessage>();
+        chats.add(new ChatThread(request.getClientName(), request.getUsername(), temp));
+        BasicResponse response = new BasicResponse(true, "Successfully added a new chat thread");
+        return new ResponseEntity<>(BasicResponse.getJson(response), HttpStatus.OK);
     }
 
 }

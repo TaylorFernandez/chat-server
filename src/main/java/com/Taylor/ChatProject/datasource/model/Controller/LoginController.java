@@ -1,5 +1,6 @@
 package com.Taylor.ChatProject.datasource.model.Controller;
 
+import com.Taylor.ChatProject.datasource.communications.Request.RequestCreateNewUser;
 import com.Taylor.ChatProject.datasource.communications.Request.RequestGetLoginStatus;
 import com.Taylor.ChatProject.datasource.communications.Response.BasicResponse;
 import com.Taylor.ChatProject.datasource.model.Datatypes.UserLogin;
@@ -28,6 +29,14 @@ public class LoginController {
             }
         }
         BasicResponse response = new BasicResponse(false, "Failed to find matching user");
+        return new ResponseEntity<>(BasicResponse.getJson(response), HttpStatus.OK);
+    }
+
+    @PostMapping("/login/newUser")
+    public ResponseEntity<Object> createNewUser(@RequestBody RequestCreateNewUser request) throws JsonProcessingException {
+        users.add(new UserLogin(request.getUsername(), request.getPassword()));
+        System.out.println("Added new user: " + request.getUsername());
+        BasicResponse response = new BasicResponse(true, "Successfully created a new user");
         return new ResponseEntity<>(BasicResponse.getJson(response), HttpStatus.OK);
     }
 }
